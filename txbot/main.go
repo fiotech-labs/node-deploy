@@ -21,7 +21,7 @@ var (
 	toAddr     = common.HexToAddress("0x04d63aBCd2b9b1baa327f2Dda0f873F197ccd186")
 
 	endpointFlag = flag.String("endpoint", "http://127.0.0.1:8545", "The endpoint of the chain")
-	chainIdFlag  = flag.Int64("chainId", 714, "The chainId of the chain")
+	chainIdFlag  = flag.Int64("chainId", 19999, "The chainId of the chain")
 	chainId      *big.Int
 )
 

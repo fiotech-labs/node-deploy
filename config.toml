@@ -1,5 +1,5 @@
 [Eth]
-NetworkId = 714
+NetworkId = 19999
 SyncMode = "full"
 NoPruning = false
 NoPrefetch = false

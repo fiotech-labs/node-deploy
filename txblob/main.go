@@ -28,7 +28,7 @@ var (
 	account, _   = fromHexKey("59ba8068eb256d520179e903f43dacf6d8d57d72bd306e1bd603fdb8c8da10e8")
 	toAddr       = common.HexToAddress("0x04d63aBCd2b9b1baa327f2Dda0f873F197ccd186")
 	endpointFlag = flag.String("endpoint", "http://127.0.0.1:8545", "The endpoint of the chain")
-	chainIdFlag  = flag.Int64("chainId", 714, "The chainId of the chain")
+	chainIdFlag  = flag.Int64("chainId", 19999, "The chainId of the chain")
 	chainId      *big.Int
 )
 var (
@@ -98,7 +98,7 @@ func createEmptyBlobTx(key *ecdsa.PrivateKey, withSidecar bool, toAddr common.Ad
 		Proofs:      []kzg4844.Proof{emptyBlobProof},
 	}
 	blobtx := &types.BlobTx{
-		ChainID:    uint256.NewInt(714),
+		ChainID:    uint256.NewInt(19999),
 		Nonce:      nonce,
 		GasTipCap:  uint256.NewInt(10 * params.GWei),
 		GasFeeCap:  uint256.NewInt(10 * params.GWei),
@@ -134,7 +134,7 @@ func createNonEmptyBlobTxs(key *ecdsa.PrivateKey, withSidecar bool, toAddr commo
 		Proofs:      []kzg4844.Proof{proof},
 	}
 	blobtx := &types.BlobTx{
-		ChainID:    uint256.NewInt(714),
+		ChainID:    uint256.NewInt(19999),
 		Nonce:      nonce,
 		GasTipCap:  uint256.NewInt(10 * params.GWei),
 		GasFeeCap:  uint256.NewInt(10 * params.GWei),

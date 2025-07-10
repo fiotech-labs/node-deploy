@@ -60,7 +60,7 @@ function reset_genesis() {
     poetry install --no-root
     npm install
     rm -rf lib/forge-std
-    forge install --no-git --no-commit foundry-rs/forge-std@v1.7.3
+    forge install --no-git foundry-rs/forge-std@v1.7.3
     cd lib/forge-std/lib
     rm -rf ds-test
     git clone https://github.com/dapphub/ds-test
