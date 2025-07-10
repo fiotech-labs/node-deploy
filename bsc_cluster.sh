@@ -37,7 +37,7 @@ function prepare_bsc_client() {
     if [ ${useLatestBscClient} = true ]; then
         if [ ! -f "${workspace}/bsc/Makefile" ]; then
             cd ${workspace}
-            git clone https://github.com/bnb-chain/bsc.git
+            git clone https://github.com/fiotech-labs/bsc.git
         fi
         cd ${workspace}/bsc && git pull && make geth && mv -f ${workspace}/bsc/build/bin/geth ${workspace}/bin/
     fi

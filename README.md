@@ -1,9 +1,10 @@
 # Deployment tools of BSC
 
-
 ## Installation
-Before proceeding to the next steps, please ensure that the following packages and softwares are well installed in your local machine: 
-- nodejs: 18.20.2 
+
+Before proceeding to the next steps, please ensure that the following packages and softwares are well installed in your local machine:
+
+- nodejs: 18.20.2
 - npm: 6.14.6
 - go: 1.24+
 - foundry
@@ -11,19 +12,39 @@ Before proceeding to the next steps, please ensure that the following packages a
 - poetry
 - jq
 
-
 ## Quick Start
-1. Clone this repository
+
+### 1. Clone this repository
+
 ```bash
 git clone https://github.com/bnb-chain/node-deploy.git
 ```
 
-2. For the first time, please execute the following command
+### 2. For the first time, please execute the following command
+
 ```bash
 pip3 install -r requirements.txt
 ```
 
-3. build `create-validator`
+### 3. Build source
+
+#### 3.1 Make geth binary files, and put it into bin/ folder.
+
+```
+git clone https://github.com/bnb-chain/bsc.git
+cd bsc && make geth
+go build -o ./build/bin/bootnode ./cmd/bootnode
+```
+
+#### 3.2 **Change ChainID (Optional)**
+
+```bash
+# To fix chainId 714 hardcoded issue, modify BSC source and rebuild:
+# Edit bsc/params/config.go line 251: RialtoChainConfig ChainID to your desired chainId
+# Then rebuild: cd bsc && make geth && cp build/bin/geth ../bin/geth
+```
+
+#### 3.3 Build `create-validator`
 
 ```bash
 # This tool is used to register the validators into StakeHub.
@@ -31,7 +52,8 @@ cd create-validator
 go build
 ```
 
-4. Configure the cluster
+### 4. Configure the cluster
+
 ```
   You can configure the cluster by modifying the following files:
    - `config.toml`
@@ -40,8 +62,10 @@ go build
    - `.env`
 ```
 
-5. Setup all nodes.
+### 5. Setup all nodes.
+
 two different ways, choose as you like.
+
 ```bash
 bash -x ./bsc_cluster.sh reset # will reset the cluster and start
 # The 'vidx' parameter is optional. If provided, its value must be in the range [0, ${BSC_CLUSTER_SIZE}). If omitted, it affects all clusters.
@@ -50,7 +74,8 @@ bash -x ./bsc_cluster.sh start [vidx] # only start the cluster
 bash -x ./bsc_cluster.sh restart [vidx] # start the cluster after stopping it
 ```
 
-6. Setup a full node.
+### 6. Setup a full node.
+
 If you want to run a full node to test snap/full syncing, you can run:
 
 > Attention: it relies on the validator cluster, so you should set up validators by `bsc_cluster.sh` firstly.
@@ -79,6 +104,7 @@ You can see the logs in `.local/fullnode`.
 Generally, you need to wait for the validator to produce a certain amount of blocks before starting the full/snap syncing test, such as 1000 blocks.
 
 ## Background transactions
+
 ```bash
 ## normal tx
 cd txbot
