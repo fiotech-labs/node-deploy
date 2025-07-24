@@ -45,16 +45,35 @@ Thư mục này chứa các hướng dẫn chi tiết để cấu hình và vậ
 
 ```mermaid
 flowchart TD
-    A[Dev Machine] --> B[1. Setup node-deploy]
-    B --> C[2. Generate production keys]
-    C --> D[3. Initialize network]
-    D --> E[4. Export configuration]
-    E --> F[VPS Infrastructure]
-    F --> G[5. Deploy validators]
-    G --> H[6. Deploy full nodes]
-    H --> I[7. Sync & migration]
-    I --> J[8. Shutdown node-deploy]
-    J --> K[🎉 Production Network]
+    A["`**Dev Machine**<br/>Clone node-deploy`"] --> B{"`Chọn Network Type`"}
+
+    B -->|Development| C1["`**Development Setup**<br/>• Chain ID: 19999<br/>• Default keys OK<br/>• Fast parameters`"]
+    B -->|Testnet| C2["`**Testnet Setup**<br/>• Chain ID: 97<br/>• **BẮT BUỘC** secure keys<br/>• Production-like params`"]
+    B -->|Mainnet| C3["`**Mainnet Setup**<br/>• Chain ID: 56<br/>• **BẮT BUỘC** HSM keys<br/>• Full production params`"]
+
+    C1 --> D1["`**1. Tạo .env file**<br/>BSC_CLUSTER_SIZE=4<br/>KEYPASS=default`"]
+    C2 --> D2["`**1. Tạo .env file**<br/>BSC_CLUSTER_SIZE=6<br/>KEYPASS=[SECURE]`"]
+    C3 --> D3["`**1. Tạo .env file**<br/>BSC_CLUSTER_SIZE=21<br/>KEYPASS=[HSM]`"]
+
+    D1 --> E1["`**2. Key Management**<br/>Sử dụng keys có sẵn`"]
+    D2 --> E2["`**2. Generate Secure Keys**<br/>📚 guidelines/2-generate-secure-keys.md<br/>• Strong passwords<br/>• Validator accounts<br/>• BLS keys (simplified)`"]
+    D3 --> E3["`**2. Generate HSM Keys**<br/>📚 guidelines/2-generate-secure-keys.md<br/>• HSM integration<br/>• Air-gapped generation<br/>• Professional audit`"]
+
+    E1 --> F["`**3. Generate Genesis**<br/>poetry run python -m scripts.generate<br/>Network-specific parameters`"]
+    E2 --> F
+    E3 --> F
+
+    F --> G["`**4. Start node-deploy**<br/>bash bsc_cluster.sh reset<br/>Verify network health`"]
+
+    G --> H["`**5. VPS Infrastructure**<br/>📚 guidelines/4-vps-infrastructure-setup.md<br/>• Provision servers<br/>• Security hardening<br/>• Monitoring setup`"]
+
+    H --> I["`**6. Deploy to VPS**<br/>📚 guidelines/3-production-deployment-workflow.md<br/>• Build BSC on VPS<br/>• Transfer keys securely<br/>• Configure services`"]
+
+    I --> J["`**7. Network Migration**<br/>• Sync validators<br/>• Test connectivity<br/>• Verify block production`"]
+
+    J --> K["`**8. Production Ready**<br/>• Graceful shutdown node-deploy<br/>• Independent operation<br/>• 24/7 monitoring`"]
+
+    K --> L["`🎉 **Production Network**<br/>Self-operating blockchain`"]
 ```
 
 ### Quick Start Paths
